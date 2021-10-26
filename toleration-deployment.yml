@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  labels:
+    author: jack
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      author: jack
+  template:
+    metadata:
+      name: mysql-pod
+      labels:
+        author: jack
+    spec:
+      containers:
+        - name: mydb
+          image: mysql:5
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: ama
+      tolerations:
+        - key: node2
+          operator: Equal
+          value: hbc2
+          effect: NoSchedule
+...
